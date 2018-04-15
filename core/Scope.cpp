@@ -1,6 +1,7 @@
 #include <Scope.h>
 #include <WSServer.h>
 #include <JSON.h>
+#include <AuxTaskRT.h>
 
 Scope::Scope(): isUsingOutBuffer(false), 
                 isUsingBuffer(false), 
@@ -56,7 +57,8 @@ void Scope::setup(unsigned int _numChannels, float _sampleRate, int _numSliders)
 		});
 
 	// setup the auxiliary tasks
-	scopeTriggerTask.create("scope-trigger-task", Scope::triggerTask, (void*)this);
+	scopeTriggerTask = std::unique_ptr<AuxTaskRT>(new AuxTaskRT());
+	scopeTriggerTask->create("scope-trigger-task", Scope::triggerTask, (void*)this);
 
 	// setup the sliders
 	sliders.resize(_numSliders);
@@ -189,7 +191,7 @@ void Scope::postlog(){
 	
     if (logCount++ > TRIGGER_LOG_COUNT){
         logCount = 0;
-        scopeTriggerTask.schedule();
+        scopeTriggerTask->schedule();
     }
 }
 

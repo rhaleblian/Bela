@@ -27,12 +27,11 @@ void Scope::dealloc(){
 	NE10_FREE(cfg);
 }
 
-void Scope::triggerTask(void* ptr){
-	Scope *instance = (Scope*)ptr;
-    if (instance->plotMode == 0){
-        instance->triggerTimeDomain();
-    } else if (instance->plotMode == 1){
-        instance->triggerFFT();
+void Scope::triggerTask(){
+    if (plotMode == 0){
+        triggerTimeDomain();
+    } else if (plotMode == 1){
+        triggerFFT();
     }
 }
 
@@ -58,7 +57,7 @@ void Scope::setup(unsigned int _numChannels, float _sampleRate, int _numSliders)
 
 	// setup the auxiliary tasks
 	scopeTriggerTask = std::unique_ptr<AuxTaskRT>(new AuxTaskRT());
-	scopeTriggerTask->create("scope-trigger-task", Scope::triggerTask, (void*)this);
+	scopeTriggerTask->create("scope-trigger-task", [this](){ triggerTask(); });
 
 	// setup the sliders
 	sliders.resize(_numSliders);

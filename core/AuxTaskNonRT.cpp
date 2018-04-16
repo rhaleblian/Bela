@@ -8,46 +8,26 @@
 
 extern int volatile gRTAudioVerbose;
 
-AuxTaskNonRT::AuxTaskNonRT(){}
-AuxTaskNonRT::~AuxTaskNonRT(){
-	lShouldStop = true;
-	cleanup();
-}
-
 bool AuxTaskNonRT::shouldStop(){
 	return (gShouldStop || lShouldStop);
 }
 
-void AuxTaskNonRT::create(std::string _name, void(*_callback)()){
+void AuxTaskNonRT::create(std::string _name, std::function<void()> callback){
 	name = _name;
-	empty_callback = _callback;
+	empty_callback = callback;
 	mode = 0;
 	__create();
 }
-void AuxTaskNonRT::create(std::string _name, void(*_callback)(const char* str)){
+void AuxTaskNonRT::create(std::string _name, std::function<void(std::string str)> callback){
 	name = _name;
-	str_callback = _callback;
+	str_callback = callback;
 	mode = 1;
 	__create();
 }
-void AuxTaskNonRT::create(std::string _name, void(*_callback)(void* buf, int size)){
+void AuxTaskNonRT::create(std::string _name, std::function<void(void* buf, int size)> callback){
 	name = _name;
-	buf_callback = _callback;
+	buf_callback = callback;
 	mode = 2;
-	__create();
-}
-void AuxTaskNonRT::create(std::string _name, void(*_callback)(void* ptr), void* _pointer){
-	name = _name;
-	ptr_callback = _callback;
-	pointer = _pointer;
-	mode = 3;
-	__create();
-}
-void AuxTaskNonRT::create(std::string _name, void(*_callback)(void* ptr, void* buf, int size), void* _pointer){
-	name = _name;
-	ptr_buf_callback = _callback;
-	pointer = _pointer;
-	mode = 4;
 	__create();
 }
 
@@ -107,8 +87,8 @@ void AuxTaskNonRT::schedule(void* ptr, size_t size){
 		rt_fprintf(stderr, "Error while sending to pipe from %s: (%d) %s (size: %d)\n", name.c_str(), errno, strerror(errno), size);
 	}
 }
-void AuxTaskNonRT::schedule(const char* str){
-	schedule((void*)str, strlen(str));
+void AuxTaskNonRT::schedule(std::string str){
+	schedule((void*)str.c_str(), strlen(str.c_str()));
 }
 void AuxTaskNonRT::schedule(){
 	char t = 0;
@@ -116,6 +96,7 @@ void AuxTaskNonRT::schedule(){
 }
 
 void AuxTaskNonRT::cleanup(){
+	lShouldStop = true;
 #ifdef XENOMAI_SKIN_native
 	rt_task_delete(&task);
 	rt_pipe_delete(&pipe);
@@ -162,7 +143,7 @@ void AuxTaskNonRT::str_loop(){
 		read(pipe_fd, buf, AUX_MAX_BUFFER_SIZE);
 		if (shouldStop())
 			break;
-		str_callback((const char*)buf);
+		str_callback(std::string((const char*)buf));
 	}
 	free(buf);
 }
@@ -173,26 +154,6 @@ void AuxTaskNonRT::buf_loop(){
 		if (shouldStop())
 			break;
 		buf_callback(buf, size);
-	}
-	free(buf);
-}
-void AuxTaskNonRT::ptr_loop(){
-	void* buf = malloc(1);
-	while(!shouldStop()){
-		read(pipe_fd, buf, 1);
-		if (shouldStop())
-			break;
-		ptr_callback(pointer);
-	}
-	free(buf);
-}
-void AuxTaskNonRT::ptr_buf_loop(){
-	void* buf = malloc(AUX_MAX_BUFFER_SIZE);
-	while(!shouldStop()){
-		ssize_t size = read(pipe_fd, buf, AUX_MAX_BUFFER_SIZE);
-		if (shouldStop())
-			break;
-		ptr_buf_callback(pointer, buf, size);
 	}
 	free(buf);
 }
@@ -211,10 +172,6 @@ void AuxTaskNonRT::thread_func(void* ptr){
 		instance->str_loop();
 	} else if (instance->mode == 2){
 		instance->buf_loop();
-	} else if (instance->mode == 3){
-		instance->ptr_loop();
-	} else if (instance->mode == 4){
-		instance->ptr_buf_loop();
 	}
 	if (gRTAudioVerbose)
 		printf("AuxTaskNonRT %s exiting\n", instance->name.c_str());

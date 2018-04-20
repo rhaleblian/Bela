@@ -535,8 +535,8 @@ process.on('uncaughtException', (err) => {
 	throw err;
 });
 // catch SIGTERM which occasionally gets thrown when cancelling the syntax check. Dunno why, it's kind of a problem.
-// process.on('SIGTERM', () => {
-//  console.log('!!!!!!!!!!!!!!!!! Got SIGTERM !!!!!!!!!!!!!!!!!!!', process.pid);
+process.on('SIGTERM', () => {
+	console.log('!!!!!!!!!!!!!!!!! Got SIGTERM !!!!!!!!!!!!!!!!!!!', process.pid);
+	process.exit();
   //allSockets.emit('report-error', 'recieved SIGTERM'); 
-// });
-
+});

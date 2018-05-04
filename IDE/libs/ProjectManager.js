@@ -591,7 +591,7 @@ function *listFiles(dir, subDir){
 // create default project settings
 function _defaultSettings(){
 	var CLArgs = CLArgs = {
-		"-p": "16",		// audio buffer size
+		"-p": "128",	// audio buffer size
 		"-C": "8",		// no. analog channels
 		"-B": "16",		// no. digital channels
 		"-H": "-6",		// headphone level (dB)
@@ -600,8 +600,8 @@ function _defaultSettings(){
 		"-M": "0", 		// mute speaker
 		"-D": "0",		// dac level
 		"-A": "0", 		// adc level
-		"--pga-gain-left": "10",
-		"--pga-gain-right": "10",
+		"--pga-gain-left": "0",
+		"--pga-gain-right": "0",
 		"user": '',		// user-defined clargs
 		"make": '',		// user-defined Makefile parameters
 		"-X": "0",		// multiplexer capelet

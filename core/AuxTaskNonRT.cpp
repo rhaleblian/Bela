@@ -127,7 +127,8 @@ void AuxTaskNonRT::cleanup(){
 	if (ret < 0){
 		fprintf(stderr, "AuxTaskNonRT %s: unable to join thread: (%i) %s\n", name.c_str(), ret, strerror(ret));
 	}
-	close(pipe_fd);
+	__wrap_close(pipe_fd);
+	__wrap_close(pipeSocket);
 #endif
 }
 

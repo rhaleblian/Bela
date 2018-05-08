@@ -8,7 +8,7 @@
 
 #define SCOPE_WS_PORT 5432
 
-static AuxTaskNonRT ws_server_task;
+static AuxTaskNonRT* ws_server_task;
 static Scope* scope;
 static seasocks::Server* server;
 static std::set<seasocks::WebSocket *> dataConnections;
@@ -156,8 +156,9 @@ void ws_server_task_func(){
 
 void scope_ws_setup(Scope* _scope){
 	scope = _scope;
-	ws_server_task.create("ws_server_task", ws_server_task_func);
-	ws_server_task.schedule();
+	ws_server_task = new AuxTaskNonRT;
+	ws_server_task->create("ws_server_task", ws_server_task_func);
+	ws_server_task->schedule();
 }
 
 class ScopeSendBufferRunnable: public seasocks::Server::Runnable{
@@ -208,4 +209,5 @@ void scope_ws_set_setting(std::wstring setting, float value){
 
 void scope_ws_cleanup(){
 	server->terminate();
+	delete ws_server_task;
 }

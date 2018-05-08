@@ -15,8 +15,6 @@ Scope::Scope(): isUsingOutBuffer(false),
 
 Scope::~Scope(){
 	dealloc();
-	sendBufferTask.cleanup();
-	scopeTriggerTask.cleanup();
 	scope_ws_cleanup();
 }
 

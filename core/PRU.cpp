@@ -38,6 +38,11 @@
  * Inverts I/O signals as appropriate for the BelaModular.
  */
 #define BELA_MODULAR
+#ifdef BELA_MODULAR
+enum {
+	SALT_SWITCH_1_GPIO = 60, // P9_12
+};
+#endif /* BELA_MODULAR */
 //#define CTAG_FACE_8CH
 //#define CTAG_BEAST_16CH
 
@@ -221,15 +226,7 @@ short int digitalPins[NUM_DIGITALS] = {
 
 #define PRU_SAMPLE_INTERVAL_NS 11338	// 88200Hz per SPI sample = 11.338us
 
-#define GPIO0_ADDRESS 		0x44E07000
 #define GPIO1_ADDRESS 		0x4804C000
-#define GPIO_SIZE			0x198
-#define GPIO_CLEARDATAOUT 	(0x190 / 4)
-#define GPIO_SETDATAOUT 	(0x194 / 4)
-
-#define TEST_PIN_GPIO_BASE	GPIO0_ADDRESS	// Use GPIO0(31) for debugging
-#define TEST_PIN_MASK		(1 << 31)
-#define TEST_PIN2_MASK		(1 << 26)
 
 #define USERLED3_GPIO_BASE  GPIO1_ADDRESS // GPIO1(24) is user LED 3
 #define USERLED3_PIN_MASK   (1 << 24)
@@ -239,10 +236,7 @@ short int digitalPins[NUM_DIGITALS] = {
 const unsigned int PRU::kPruGPIODACSyncPin = 5;	// GPIO0(5); P9-17
 const unsigned int PRU::kPruGPIOADCSyncPin = 48; // GPIO1(16); P9-15
 
-const unsigned int PRU::kPruGPIOTestPin = 60;	// GPIO1(28); P9-12
-const unsigned int PRU::kPruGPIOTestPin2 = 31;	// GPIO0(31); P9-13
-const unsigned int PRU::kPruGPIOTestPin3 = 26;	// GPIO0(26); P8-14
-
+#ifdef USE_NEON_FORMAT_CONVERSION
 // These four functions are written in assembly in FormatConvert.S
 extern "C" {
 	void int16_to_float_audio(int numSamples, int16_t *inBuffer, float *outBuffer);
@@ -250,6 +244,8 @@ extern "C" {
 	void float_to_int16_audio(int numSamples, float *inBuffer, int16_t *outBuffer);
 	void float_to_int16_analog(int numSamples, float *inBuffer, uint16_t *outBuffer);
 }
+#endif /* USE_NEON_FORMAT_CONVERSION */
+
 // Constructor: specify a PRU number (0 or 1)
 PRU::PRU(InternalBelaContext *input_context)
 : context(input_context),
@@ -258,7 +254,6 @@ PRU::PRU(InternalBelaContext *input_context)
   running(false),
   analog_enabled(false),
   digital_enabled(false), gpio_enabled(false), led_enabled(false),
-  gpio_test_pin_enabled(false),
   pru_buffer_comm(0),
   audio_expander_input_history(0), audio_expander_output_history(0),
   audio_expander_filter_coeff(0)
@@ -324,6 +319,10 @@ int PRU::prepareGPIO(int include_led)
 
 	if(context->digitalFrames != 0){
 		for(unsigned int i = 0; i < context->digitalChannels; i++){
+#ifdef BELA_MODULAR
+			if(digitalPins[i] == SALT_SWITCH_1_GPIO)
+				continue; // leave alone this pin as it is used by bela_button.service
+#endif /* BELA_MODULAR */
 			if(gpio_export(digitalPins[i])) {
 				if(gRTAudioVerbose)
 					fprintf(stderr,"Warning: couldn't export digital GPIO pin %d\n" , digitalPins[i]); // this is left as a warning because if the pin has been exported by somebody else, can still be used
@@ -359,13 +358,12 @@ void PRU::cleanupGPIO()
 	}
 	if(digital_enabled){
 		for(unsigned int i = 0; i < context->digitalChannels; i++){
+#ifdef BELA_MODULAR
+			if(digitalPins[i] == SALT_SWITCH_1_GPIO)
+				continue; // leave alone this pin as it is used by bela_button.service
+#endif /* BELA_MODULAR */
 			gpio_unexport(digitalPins[i]);
 		}
-	}
-	if(gpio_test_pin_enabled) {
-		gpio_unexport(kPruGPIOTestPin);
-		gpio_unexport(kPruGPIOTestPin2);
-		gpio_unexport(kPruGPIOTestPin3);
 	}
 	if(led_enabled) {
 		// Set LED back to default eMMC status
@@ -373,7 +371,7 @@ void PRU::cleanupGPIO()
 		// rather than the system default
 		led_set_trigger(3, "mmc1");
 	}
-	gpio_enabled = gpio_test_pin_enabled = false;
+	gpio_enabled = false;
 }
 
 // Initialise and open the PRU

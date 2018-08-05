@@ -81,9 +81,9 @@ class SettingsView extends View {
 	restoreDefaultCLArgs(func){
 		
 		// build the popup content
-		popup.title(jsonData.popups.restore_defaults.title);
+		popup.title(jsonData.popups.restore_defaults_cl.title);
 
-		popup.subtitle(jsonData.popups.restore_defaults.text);
+		popup.subtitle(jsonData.popups.restore_defaults_cl.text);
 		
 		var form = [];
 		form.push('<button type="submit" class="button popup ' + jsonData.buttons.continue.class_name + '">' + jsonData.buttons.continue.button_text + '</button>');
@@ -110,12 +110,12 @@ class SettingsView extends View {
 	restoreDefaultIDESettings(func){
 		
 		// build the popup content
-		popup.title('Restoring default IDE settings');
-		popup.subtitle('Are you sure you wish to continue? Your current IDE settings will be lost!');
+		popup.title(jsonData.popups.restore_defaults_ide.title);
+		popup.subtitle(jsonData.popups.restore_defaults_ide.text);
 		
 		var form = [];
-		form.push('<button type="submit" class="button popup-continue">Continue</button>');
-		form.push('<button type="button" class="button popup-cancel">Cancel</button>');
+		form.push('<button type="submit" class="button popup ' + jsonData.buttons.continue.class_name + '">' + jsonData.buttons.continue.button_text + '</button>');
+		form.push('<button type="button" class="button popup ' + jsonData.buttons.cancel.class_name + '">' + jsonData.buttons.cancel.button_text + '</button>');
 		
 		popup.form.append(form.join('')).off('submit').on('submit', e => {
 			e.preventDefault();
@@ -123,11 +123,11 @@ class SettingsView extends View {
 			popup.hide();
 		});
 		
-		popup.find('.popup-cancel').on('click', popup.hide );
+		popup.find('.' + jsonData.buttons.cancel.class_name).on('click', popup.hide );
 		
 		popup.show();
 		
-		popup.find('.popup-continue').trigger('focus');
+		popup.find('.' + jsonData.buttons.continue.class_name).trigger('focus');
 		
 	}
 	
@@ -203,9 +203,9 @@ class SettingsView extends View {
 			
 			if (file){
 			
-				this.emit('warning', 'Beginning the update - this may take several minutes');
-				this.emit('warning', 'The browser may become unresponsive and will temporarily disconnect');
-				this.emit('warning', 'Do not use the IDE during the update process!');
+				this.emit('warning', jsonData.warnings.update.1);
+				this.emit('warning', jsonData.warnings.update.2);
+				this.emit('warning', jsonData.warnings.update.3);
 				
 				popup.hide('keep overlay');
 				
@@ -215,7 +215,7 @@ class SettingsView extends View {
 				
 			} else {
 			
-				this.emit('warning', 'not a valid update zip archive');
+				this.emit('warning', jsonData.warnings.invalid_zip);
 				popup.hide();
 				
 			}

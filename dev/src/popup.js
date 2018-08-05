@@ -67,13 +67,15 @@ function example(cb, arg, delay, cancelCb){
 		popup.hide();
 	});
 		
-	popup.find('.popup-cancel').on('click', () => {
+	// Hide popup when cancel buton is clicked:
+	popup.find('.'+jsonData.buttons.cancel.class_name).on('click', () => {
 		popup.hide();
 		if (cancelCb) cancelCb();
 	});
 	
 	popup.show();
 	
-	popup.find('.popup-continue').trigger('focus');
+	// Switch focus when Save As button is clicked:
+	popup.find('.' + jsonData.buttons.save_changes.class_name).trigger('focus');
 	
 }

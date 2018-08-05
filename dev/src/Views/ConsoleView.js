@@ -1,6 +1,7 @@
 'use strict';
 var View = require('./View');
 var _console = require('../console');
+var jsonData = require('../site-data.json');
 
 var shellCWD = '~';
 
@@ -139,7 +140,7 @@ class ConsoleView extends View{
 	}
 	disconnect(){
 		console.log('disconnected');
-		_console.warn('You have been disconnected from the Bela IDE and any more changes you make will not be saved. Please check your USB connection and reboot your BeagleBone', 'console-disconnect');
+		_console.warn(jsonData.warnings.disconnect, 'console-disconnect');
 		_console.block();
 	}
 	
@@ -187,20 +188,20 @@ class ConsoleView extends View{
 	_building(status, data){
 		var timestamp = performance.now();
 		if (status){
-			_console.notify('Building project...', timestamp, true);
+			_console.notify(jsonData.notifications.build, timestamp, true);
 			_console.fulfill('', timestamp, true);
 		} else {
-			_console.notify('Build finished', timestamp, true);
+			_console.notify(jsonData.notifications.build_finished, timestamp, true);
 			_console.fulfill('', timestamp, true);
 		}
 	}
 	_running(status, data){
 		var timestamp = performance.now();
 		if (status){
-			_console.notify('Running project...', timestamp, true);
+			_console.notify(jsonData.notifications.running_project, timestamp, true);
 			_console.fulfill('', timestamp, true);
 		} else {
-			_console.notify('Bela stopped', timestamp, true);
+			_console.notify(jsonData.notifications.stop, timestamp, true);
 			/*if (data && data.belaResult && data.belaResult.signal && data.belaResult.signal !== 'undefined'){
 				_console.reject(' with signal '+data.belaResult.signal, timestamp, true);
 			} else {*/

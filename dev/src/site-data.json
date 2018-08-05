@@ -15,7 +15,7 @@
     },
     "create_project": {
       "title": "Create a new project",
-      "text": "Choose what kind of project you would like to create:",
+      "text": "Choose a project template:",
       "text_2": "Enter the name of your new project:"
     },
     "create_file": {
@@ -32,9 +32,13 @@
       "text": "Enter the new name of this file, with its extension (only files with extensions .cpp, .c or .S will be compiled).",
       "input_text": "Enter the new file name"
     },
-    "restore_defaults": {
-      "title": "Restore default settings?",
-      "text": "This will restore the Bela default settings, overwriting all your changes. This can't be undone!"
+    "restore_defaults_cl": {
+      "title": "Restore default command line settings?",
+      "text": "This will restore the default settings for the Bela command line, overwriting all your changes. This can't be undone!"
+    },
+    "restore_defaults_ide": {
+      "title": "Restore default IDE settings?",
+      "text": "This will restore the default settings for the Bela IDE, overwriting all your changes. This can't be undone!"
     },
     "about_bela": {
       "title": "About Bela",
@@ -103,8 +107,21 @@
       "class_name": "update",
       "button_text": "Update Bela"
     }
-  }
-
-
+  },
+    "warnings": {
+      "disconnect": "You have been disconnected from the Bela IDE and any more changes you make will not be saved. Please check your USB connection and reboot your BeagleBone",
+      "update": {
+        "1": "Beginning the update - this may take several minutes",
+        "2": "The browser may become unresponsive and will temporarily disconnect",
+        "3": "Do not use the IDE during the update process!"
+      },
+      "invalid_zip": "This is not a valid zip archive. Please try again."
+    },
+    "notifications": {
+      "build": "Building project ...",
+      "build_finished": "Build finished.",
+      "running_project": "Running project ...",
+      "stop": "Bela stopped."
+    }
 
 }

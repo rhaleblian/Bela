@@ -1,0 +1,42 @@
+ul {
+	font-family: inconsolata;
+}
+
+.file-list > li {
+	font-family: poppins_regular;
+	& > p {
+		padding: 3px 0 3px 10px;
+		margin: 0;
+		width: 100%;
+		border-bottom: 1px solid $grey-light-04;
+	}
+	&:first-child > p {
+		margin: -5px 0 0 0;
+	}
+}
+
+.sub-file-list > li {
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.8);
+	padding: 4px 12px;
+	&:hover {
+		background: rgba(255, 255, 0, 0.2);
+	}
+	&:before {
+		margin-right: 5px;
+		size: 12px;
+		font-family: poppins_light;
+		content: '-'; /* Unicode character for "minus" sign (-) */
+	}
+}
+
+.example-list > li {
+	padding: 4px 10px;
+	&:before {
+		margin-right: 10px;
+		content: '+'
+	}
+	&:hover {
+		background: rgba(255, 255, 0, 0.2);
+	}
+}

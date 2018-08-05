@@ -1,0 +1,53 @@
+/* ========== TYPOGRAPHY ========== */
+
+@font-face {
+    font-family: 'poppins_bold';
+    src: url('../../fonts/poppins-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'poppins_light';
+    src: url('../../fonts/poppins-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'poppins_regular';
+    src: url('../../fonts/poppins-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'space_bold';
+    src: url('../fonts/spacemono-bold-webfont.woff2') format('woff2'),
+         url('../fonts/spacemono-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'space_regular';
+    src: url('../fonts/spacemono-regular-webfont.woff2') format('woff2'),
+         url('../fonts/spacemono-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'inconsolata';
+    src: url('../../fonts/inconsolata-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$font-title: 'space_regular', monospace;
+$font-title-bold: 'space_bold', monospace;
+
+$font-body: 'poppins_regular', sans-serif;
+$font-body-bold: 'poppins_bold', sans-serif;
+
+$font-console: 'inconsolata', monospace;

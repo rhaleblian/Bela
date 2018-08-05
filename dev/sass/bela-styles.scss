@@ -1,0 +1,27 @@
+// This is where all the scss components are included from the /components folder in this directory.
+// NOTE: The order matters! They are included and compiled into css in the order specified, and the cascading
+// nature of css means that it's easy to overwrite previous styles by re-specifying them further down the stylesheet. 
+// Best practice is to try to keep the styling of elements to once per component sheet, reducing the likelihood of 
+// overwriting later on.
+
+@import 
+	'components/reset',
+	'components/color-scheme',
+	'components/type',
+	'components/layout',
+	'components/text-input',
+	'components/icons',
+	'components/tabs',
+	'components/tab-menu', 
+	'components/tab-content', 
+	'components/buttons', 
+	'components/pins', 
+	'components/file-list',
+	'components/example-list', 
+	'components/accordion-menu', 
+	'components/dropdown-mini', 
+	'components/dropdown', 
+	'components/number-selector', 
+	'components/scrollbar', 
+	'components/git'
+	;

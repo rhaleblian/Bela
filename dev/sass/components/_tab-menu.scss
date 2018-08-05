@@ -1,0 +1,146 @@
+/*
+ * Make each label stack on top of one another.
+ *
+ */
+#tab-menu {
+	background-color: $grey-light-02;
+	li#open-tab {
+		background-color: $grey-light-02;
+	}
+
+	li {
+		background: $grey-light-02;
+		position: relative;
+		list-style: none;
+		height: 50px;
+		width: 50px;
+		padding: 0;
+		transition: 0.2s ease-in-out;
+		cursor: hand;
+		a {
+			width: 100%;
+			height: 100%;
+			&:hover {
+				color: $teal-main;
+				transition: 0.2s ease-in-out;
+			}
+	}
+		&.explorer {
+			background-image: url('../images/icons/explorer_white.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			&:hover {
+				background-image: url('../images/icons/explorer_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			&.active{
+				background-image: url('../images/icons/explorer_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+			}
+	}
+			&.examples {
+			background-image: url('../images/icons/examples_white.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			&:hover {
+				background-image: url('../images/icons/examples_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			&.active{
+				background-image: url('../images/icons/examples_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+			}
+	}
+			&.settings {
+			background-image: url('../images/icons/settings_white.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			&:hover {
+				background-image: url('../images/icons/settings_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			&.active{
+				background-image: url('../images/icons/settings_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+			}
+		}
+		&.pins {
+			background-image: url('../images/icons/pins_white.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			&:hover {
+				background-image: url('../images/icons/pins_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			&.active{
+				background-image: url('../images/icons/pins_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+			}
+		}
+
+		&.refs {
+			background-image: url('../images/icons/refs_white.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			&:hover {
+				background-image: url('../images/icons/refs_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+			}
+			&.active{
+				background-image: url('../images/icons/refs_green.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+
+			}
+		}
+		&.active {
+		transition: 0.2s ease-in-out;
+		background: $white;
+		border-left: 5px solid $teal-main;
+		// If there isn't a border-bottom of none, there's a weird bevel on the tab highlight.
+		border-bottom: none;
+		margin-left: -5px;
+			a {
+				color: $teal-main;
+			}
+		}
+}
+
+
+
+	
+}
+
+.rot {
+	display: block;
+	transform: rotate(45deg);
+	transition: 0.3s ease-in-out;
+}
+
+.tab-button {
+	color: rgba(255, 255, 255, 0.9);
+	margin: 0;
+	font-weight: bolder;
+	text-decoration: none;
+	padding-left: 10px;
+	font-family: space_bold;
+	font-size: 50px;
+	line-height: 50px;
+}
+
+.tab-content-area {
+    display: none;
+}

@@ -1,0 +1,18 @@
+#git-controls {
+	padding-top: 10px;
+	div {
+		padding: 10px 0;
+		button:not(:first-child) {
+			margin-left: 10px;
+		}
+		.mini-dropdown {
+			display: inline;
+		}
+		p {
+			font-family: poppins_light;
+			display: inline;
+			font-size: 10px;
+			margin-left: 10px
+		}
+	} 
+}

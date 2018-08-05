@@ -1,0 +1,40 @@
+#tab-menu {
+	width: 50px;
+	height: 100%;
+	background-color: $grey-light-00;
+	float: left;
+}
+
+#tab-content-area {
+	height: 100%;
+	background-color: #fff;
+	overflow: auto;
+}
+
+section#tab-content {
+	padding: 0 20px 20px 20px;
+	.title-container {
+		display: block;
+		margin: 0;
+		hr {
+			// display: block;
+			background: transparent;
+		}
+		h1 {
+			border-bottom: 10px solid $teal-01;
+			display: inline-block;
+			font-size: 24px;
+			font-family: space_bold;
+			color: rgba(0, 0, 0, 0.8);
+			opacity: 0.8;
+		}
+	}
+
+	p {
+		font-size: 12px;
+	}
+}
+
+.disabled {
+	display: none;
+}

@@ -143,16 +143,16 @@ class Scope{
         void scope_control_data(const char* data);
         void parse_settings(JSONValue* value);
         
-		bool isUsingOutBuffer;
-		bool isUsingBuffer;
-		bool isResizing;
+	bool volatile isUsingOutBuffer;
+	bool volatile isUsingBuffer;
+	bool volatile isResizing;
 		
         // settings
         int numChannels;
         float sampleRate;
         int pixelWidth;
         int frameWidth;
-        int plotMode;
+        int plotMode = 0;
         int triggerMode;
         int triggerChannel;
         int triggerDir;

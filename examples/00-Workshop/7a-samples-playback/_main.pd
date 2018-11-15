@@ -1,0 +1,46 @@
+#N canvas 1557 22 1093 841 10;
+#N canvas 0 22 450 300 (subpatch) 0;
+#X array table-1 201388 float 2;
+#X coords 0 1 201388 -1 200 140 1 0 0;
+#X restore 15 543 graph;
+#X text 266 57 <<< loading a file:;
+#X text 266 77 point soundfiler to the samples folder;
+#X obj 19 86 soundfiler;
+#X obj 19 24 loadbang;
+#X text 265 122 <<< If you include your own samples in the project
+;
+#X text 266 97 name_of_file.wav;
+#X text 265 142 just change the path to the file name;
+#X obj 32 462 *~ 0.2;
+#X obj 32 483 dac~ 1 2;
+#X obj 32 286 *~;
+#X obj 118 245 r sampleLength1;
+#X obj 19 110 s sampleLength1;
+#X obj 78 195 expr 44100/$f1;
+#X obj 32 245 phasor~;
+#X text 263 215 <<< sample rate divided by sample length to calculate
+;
+#X text 263 235 frequency of the phasor that looks up from the table
+;
+#X obj 34 149 adc~ 4;
+#X obj 34 170 map~ -2 2;
+#X obj 34 191 *~;
+#X obj 32 321 tabread4~ table-1;
+#X text 266 20 table-1 contains a sample from file;
+#X text 517 317 task1: change sample;
+#X text 517 337 task2: trigger when over a threshold with fsr;
+#X msg 19 58 read -resize rt.wav table-1;
+#X connect 3 0 12 0;
+#X connect 4 0 24 0;
+#X connect 8 0 9 0;
+#X connect 8 0 9 1;
+#X connect 10 0 20 0;
+#X connect 11 0 10 1;
+#X connect 11 0 13 0;
+#X connect 13 0 19 1;
+#X connect 14 0 10 0;
+#X connect 17 0 18 0;
+#X connect 18 0 19 0;
+#X connect 19 0 14 0;
+#X connect 20 0 8 0;
+#X connect 24 0 3 0;

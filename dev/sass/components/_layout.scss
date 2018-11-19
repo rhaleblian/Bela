@@ -33,23 +33,24 @@ body {
 	height: 75%;
 	z-index: 96;
 	position: relative;
-	>.file-status { 
-		margin-left: 60px;
-		>.span.project, span.file {
-			display: inline-block;
-			padding-top:10px;
-			font-family: space_regular;
-			font-size: 16px;
-			color: $teal-main;
-		}
-		>.span.current {
-		font-family: poppins_regular;
-		color: rgba(0, 0, 0, 0.7);
-		padding-right: 20px;
-		font-size: 14px;
-		}
-	}	
 }
+.upper .file-status { 
+	margin-left: 60px;
+}
+span.project, span.file {
+	display: inline-block;
+	padding-top:10px;
+	font-family: space_regular;
+	font-size: 16px;
+	color: $teal-main;
+}
+span.current {
+	font-family: poppins_regular;
+	color: rgba(0, 0, 0, 0.7);
+	padding-right: 20px;
+	font-size: 14px;
+}
+		
 
 
 /* EDITOR WINDOW */
@@ -127,7 +128,7 @@ hr {
 	height: 200px;
 	z-index: 100;
 	position: relative;
-	font-family: inconsolata;
+	font-family: 'inconsolata';
 	color: rgba(0, 0, 0, 0.8);
 	font-size: 12px;
 

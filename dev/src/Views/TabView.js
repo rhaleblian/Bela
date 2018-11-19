@@ -72,7 +72,7 @@ class TabView extends View {
 			}]
 		});
 		layout.registerComponent( 'Editor', function( container, componentState ){
-			container.getElement().append($('#innerContent'));
+			container.getElement().append($('.inner-content'));
 		});
 		layout.registerComponent( 'Console', function( container, componentState ){
 			container.getElement().append($('#beaglert-console'));

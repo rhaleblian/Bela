@@ -1,4 +1,4 @@
-                  var View = require('./View');
+var View = require('./View');
 var popup = require('../popup');
 var jsonData = require('../site-data.json');
 var sanitise = require('../utils').sanitise;

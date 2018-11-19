@@ -23,22 +23,26 @@
 $( document ).ready( function () {
 	// First, we need some global variables. Mainly the height and width of the whole window.
 
-var $docInfo = {
-	width : $(window).width();
-	height : $(window).height();
-}
+    // $.getJSON('site-data.json',function(data){
+    //     console.log('got JSON!');
+    // 	});
 
-var width = $docInfo.width;
-var height = $docInfo.height;
+	var $docInfo = {
+		width : $(window).width(),
+		height : $(window).height()
+	}
 
-// Drag toolbar up and down.
-// 1. Have something to click on that we know is what we want to detect as dragging.
+	var width = $docInfo.width;
+	var height = $docInfo.height;
 
-var $dragObject = $( '.dragButton' );
+	// Drag toolbar up and down.
+	// 1. Have something to click on that we know is what we want to detect as dragging.
 
-$dragObject.on('click', function() {
-	console.log('I AM BUTTON');
-});
+	var $dragObject = $( '.dragButton' );
+
+	$dragObject.on('click', function() {
+		console.log('I AM BUTTON');
+	});
 
 
 	function openTabs() {
@@ -76,6 +80,7 @@ $dragObject.on('click', function() {
 			return false;
 		});
 
+		// This is for dragging the bottom section up and down. Not done yet, just testing things:
 
 	 	if ($('.dragButton').hasClass('dragActive')) {
 	 		console.log('barp');

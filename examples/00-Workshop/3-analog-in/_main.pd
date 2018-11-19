@@ -1,4 +1,4 @@
-#N canvas 1349 22 1851 1036 10;
+#N canvas 0 22 1440 856 10;
 #X text 36 419 ADC 3: Analog In 0;
 #X text 34 41 Basic analog in (or 'theremin');
 #X text 34 51 ===============================;
@@ -43,7 +43,7 @@ a;
 in 0;
 #X text 453 307 Task 3: map the frequency range to [300 1200];
 #X text 454 274 Task 2: connect the analog input to the;
-#X obj 63 222 *~ 1500;
+#X obj 43 222 *~ 1500;
 #X obj 43 274 *~;
 #N canvas 0 22 235 352 oscillator 0;
 #X obj 48 44 inlet~;
@@ -74,13 +74,9 @@ in 0;
 IDE.;
 #X text 454 372 Task 5: view the effect of different filter types on
 the sensor signal;
-#X obj 176 316 dac~ 27 28 29 30;
 #X connect 14 0 41 1;
-#X connect 14 0 47 0;
 #X connect 14 1 40 0;
-#X connect 14 1 47 1;
 #X connect 40 0 42 0;
 #X connect 41 0 34 0;
 #X connect 41 0 34 1;
-#X connect 41 0 47 2;
 #X connect 42 0 41 0;

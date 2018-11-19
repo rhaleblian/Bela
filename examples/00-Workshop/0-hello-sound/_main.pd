@@ -6,13 +6,14 @@
 #X text 463 61 .|____/|_____|_____/_/..._|.io;
 #X text 463 71 ............................;
 #X text 463 41 .| __ || __|.| |...../ _| |.;
-#X text 200 29 to access the Bela IDE.;
-#X text 200 17 Go to webpage http://192.168.7.2;
+#X text 200 49 to access the Bela IDE.;
 #X text 64 30 Hello World;
 #X text 64 40 ===========;
 #X text 450 144 Press the run button in the IDE;
 #X obj 58 205 dac~ 1 2;
 #X text 121 205 <== Audio out L + R;
 #X obj 58 154 techno-world;
-#X connect 14 0 12 0;
-#X connect 14 0 12 1;
+#X text 200 17 Go to webpage http://bela.local/;
+#X text 199 33 or http://192.168.6.2 on windows;
+#X connect 13 0 11 0;
+#X connect 13 0 11 1;

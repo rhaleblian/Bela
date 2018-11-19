@@ -1,4 +1,4 @@
-#N canvas 1554 27 1380 932 10;
+#N canvas 60 22 1380 856 10;
 #X obj 164 142 adc~ 4;
 #X obj 323 141 adc~ 5;
 #X text 33 22 Simple FM;
@@ -13,7 +13,7 @@
 #X obj 124 326 receive~ harmonicRatio;
 #X obj 189 356 receive~ modulationIndex;
 #X obj 164 204 send~ harmonicRatio;
-#X obj 323 262 send~ modulationIndex;
+#X obj 323 202 send~ modulationIndex;
 #X text 33 55 Simple frequency modulation synthesis. Use the first
 three;
 #X text 33 69 analog inputs to change frequency \, harmonic ratio and
@@ -45,14 +45,11 @@ three;
 3];
 #X text 634 262 how to map to 0-25 range.;
 #X obj 164 173 *~ 16;
-#X obj 323 241 *~ 2000;
+#X obj 323 171 *~ 2000;
 #X text 634 313 Task 3: (extra) use simple-sequencer to arpeggiate
 \,;
-#X obj 421 209 dac~ 27 28 29 30;
-#X obj 392 166 -~ 0.3;
 #X connect 0 0 41 0;
 #X connect 1 0 42 0;
-#X connect 1 0 45 0;
 #X connect 4 0 9 0;
 #X connect 5 0 6 0;
 #X connect 6 0 4 1;
@@ -73,4 +70,3 @@ three;
 #X connect 35 0 34 0;
 #X connect 41 0 13 0;
 #X connect 42 0 14 0;
-#X connect 45 0 44 0;

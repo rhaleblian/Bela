@@ -1,4 +1,4 @@
-#N canvas 1412 144 1788 872 10;
+#N canvas 0 22 1440 856 10;
 #X obj 60 297 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 88 296 Blink that LED!;
@@ -23,31 +23,12 @@
 #X text 445 208 Task1: print the value of the button;
 #X text 445 222 to the console of the IDE.;
 #X text 445 248 Task2: trigger the;
-#X obj 267 316 kick;
-#X obj 309 315 snare;
 #X text 446 263 with each button down;
 #X text 445 292 Task3: alternate between [kick] and;
 #X text 445 344 Task5: add a debouncer using [delay].;
 #X text 445 319 Task4: play a random freq tone on each press using
 [random].;
-#X obj 201 270 print;
-#X obj 270 287 select 0 1;
-#X obj 273 351 dac~ 1 2;
-#X obj 348 237 random 1000;
-#X obj 348 261 osc~;
-#X obj 348 279 *~ 0.1;
 #X connect 0 0 15 0;
 #X connect 3 0 16 0;
 #X connect 16 0 2 0;
 #X connect 17 0 0 0;
-#X connect 17 0 29 0;
-#X connect 17 0 30 0;
-#X connect 17 0 32 0;
-#X connect 23 0 31 0;
-#X connect 24 0 31 1;
-#X connect 30 0 23 0;
-#X connect 30 1 24 0;
-#X connect 32 0 33 0;
-#X connect 33 0 34 0;
-#X connect 34 0 31 0;
-#X connect 34 0 31 1;

@@ -1,4 +1,4 @@
-#N canvas 1557 22 1093 841 10;
+#N canvas 347 22 1093 841 10;
 #N canvas 0 22 450 300 (subpatch) 0;
 #X array table-1 201388 float 2;
 #X coords 0 1 201388 -1 200 140 1 0 0;
@@ -27,8 +27,8 @@
 #X obj 34 191 *~;
 #X obj 32 321 tabread4~ table-1;
 #X text 266 20 table-1 contains a sample from file;
-#X text 517 317 task1: change sample;
-#X text 517 337 task2: trigger when over a threshold with fsr;
+#X text 267 317 task1: change sample;
+#X text 267 337 task2: trigger when over a threshold with fsr;
 #X msg 19 58 read -resize rt.wav table-1;
 #X connect 3 0 12 0;
 #X connect 4 0 24 0;
